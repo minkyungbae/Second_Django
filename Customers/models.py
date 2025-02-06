@@ -5,5 +5,3 @@ class CustomerModel(models.Model):
     customer_name = models.CharField(max_length=50) # 고괙 이름
     customer_regdate = models.DateField(auto_now_add=True) # 등록일
     customer_number = models.CharField(max_length=50) # 고객 번호
-    
-    
