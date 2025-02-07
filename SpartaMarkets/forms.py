@@ -1,7 +1,7 @@
 from django import forms
 from .models import MarketModel
 
-class MarketModelForm(forms.modelform):
+class MarketModelForm(forms.ModelForm):
     class Meta:
         model = MarketModel
         field = [
