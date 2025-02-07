@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # etc
+    'rest_framework',
+    
     # My App
     'SpartaMarkets',
     'Products',
