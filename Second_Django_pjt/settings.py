@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # etc
-    'rest_framework',
+    # 'rest_framework',
     
     # My App
     'SpartaMarkets',
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'Second_Django_pjt.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
