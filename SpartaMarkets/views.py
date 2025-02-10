@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from .models import MarketModel
 from .forms import MarketModelForm
 
-# get, post, delete, put 다 있음
+# get, post 있음
 class MarketInfoAPIView(APIView):
     
     def get(self, request, market_id): # 들고 오기
@@ -46,7 +46,9 @@ class MarketInfoAPIView(APIView):
         # 유효하지 않으면 에러
         return Response(status=status.HTTP_400_BAD_REQUEST)
         
-    
+        
+# delete, put 있음
+class MarketInfoDetailAPIView(APIView):
     def delete(self, request, market_id): # 삭제하기
         market = get_object_or_404(MarketModel, market_id = market_id) # 기존 거 조회하기
         market.delete()
