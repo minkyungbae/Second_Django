@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Market's informations</h2>
+<a href="{% url 'SpartMaket:market_list' %}"><button>Create Market Informations</button>
+<hr>
+<p>
+    {% for market in market_list %}
+        <a href={% url 'SpartMaket:detail' market_id %}>
+            <h3>[{{ market_id }}] Store of {{market_zone}}</h3>
+
+    {% endfor %}
+
+</p>
+{% endblock content %}
