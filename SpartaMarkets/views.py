@@ -9,22 +9,7 @@ from .forms import MarketModelForm
 # get, post 있음
 class MarketInfoAPIView(APIView):
     
-    def get(self, request, market_id): # 들고 오기
-        
-        # 특정 market_id를 가진 정보 들고 오기
-        if market_id:
-            market = get_object_or_404(MarketModel, market_id=market_id)
-        
-            data = {
-                "market_id" : market.market_id,
-                "market_zone" : market.market_zone,
-                "market_manager" : market.market_manager,
-                "market_number" : market.market_number,
-                "market_opening_date" : market.market_opening_date,
-                "market_employees" : market.market_employees,
-            }
-            return Response(data, status=status.HTTP_200_OK)
-
+    def get(self, request): # 들고 오기
         # 모든 market 정보 가져오기
         markets = MarketModel.objects.all()
         data = {
@@ -49,6 +34,22 @@ class MarketInfoAPIView(APIView):
         
 # delete, put 있음
 class MarketInfoDetailAPIView(APIView):
+    def get(self, request, market_id):
+        # 특정 market_id를 가진 정보 들고 오기
+        if market_id:
+            market = get_object_or_404(MarketModel, market_id=market_id)
+        
+            data = {
+                "market_id" : market.market_id,
+                "market_zone" : market.market_zone,
+                "market_manager" : market.market_manager,
+                "market_number" : market.market_number,
+                "market_opening_date" : market.market_opening_date,
+                "market_employees" : market.market_employees,
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        
+        
     def delete(self, request, market_id): # 삭제하기
         market = get_object_or_404(MarketModel, market_id = market_id) # 기존 거 조회하기
         market.delete()
