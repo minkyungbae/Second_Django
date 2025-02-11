@@ -11,7 +11,7 @@ from .models import MarketModel
 from .forms import MarketModelForm
 # from .serializers import MarketModelSerializer
 
-# get, post 있음
+# 마켓 정보 가져오기
 class MarketInfoView(View):
     
     def get(self, request): # 들고 오기
@@ -21,14 +21,15 @@ class MarketInfoView(View):
         markets_data = list(markets.values())
         content = {"markets_data":markets_data}
         return render(request, "SpartaMarkets/market_list.html", content)
-    
-    
+
+# 마켓 새로 입력하기
+class MarketCreateView(View):   
     def post(self, request): # 입력하기
         data = json.loades(request.body)
         form = MarketModelForm(data) # 요청한 데이터를 form에 바인딩
         if form.is_valid():
             form.save() # request 값을 바로 DB에 저장
-            return HttpResponse(status=200)
+            return render(request, "SpartaMarkets/create.html")
         # 유효하지 않으면 에러
         return HttpResponse(status=400)
         
