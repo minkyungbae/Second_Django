@@ -25,8 +25,7 @@ class MarketInfoView(View):
 # 마켓 새로 입력하기
 class MarketCreateView(View):   
     def post(self, request): # 입력하기
-        data = json.loades(request.body)
-        form = MarketModelForm(data) # 요청한 데이터를 form에 바인딩
+        form = MarketModelForm(request.POST) # 요청한 데이터를 form에 바인딩
         if form.is_valid():
             form.save() # request 값을 바로 DB에 저장
             return render(request, "SpartaMarkets/create.html")
@@ -34,7 +33,7 @@ class MarketCreateView(View):
         return HttpResponse(status=400)
         
         
-# delete, put 있음
+# 마켓 디테일 보기
 class MarketInfoDetailView(View):
     def get(self, request, market_id):
         # 특정 market_id를 가진 정보 들고 오기
@@ -43,11 +42,16 @@ class MarketInfoDetailView(View):
         return JsonResponse(data)
         
         
+ # 마켓 삭제하기
+class MarketDeleteView(View):
     def delete(self, request, market_id): # 삭제하기
         market = get_object_or_404(MarketModel, market_id = market_id) # 기존 거 조회하기
         market.delete()
         return HttpResponse(status=204)
-    
+
+
+# 마켓 수정하기
+class MarketPutView(View):
     def put(self, request, market_id): # 수정하기
         market = get_object_or_404(MarketModel, market_id=market_id) # 기존 거 조회하기
         data = json.loads(request.body)
