@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 # from rest_framework import status
 # from rest_framework.views import APIView
 from django.views import View
-from django.http  import JsonResponse, HttpResponse
-from django.forms.models import model_to_dict
-import json
+# from django.http  import JsonResponse, HttpResponse
+# from django.forms.models import model_to_dict
+# import json
 from django.urls import reverse
 from .models import MarketModel
 from .forms import MarketModelForm
@@ -43,30 +43,33 @@ class MarketCreateView(View):
 class MarketInfoDetailView(View):
     def get(self, request, market_id):
         # 특정 market_id를 가진 정보 들고 오기
-        market = get_object_or_404(MarketModel, market_id=market_id)
-        data = model_to_dict(market)
-        return JsonResponse(data)
+        market = get_object_or_404(MarketModel, id=market_id)
+        return render(request, "SpartaMarkets/market_detail.html", {"market":market})
         
         
  # 마켓 삭제하기
 class MarketDeleteView(View):
-    def delete(self, request, market_id): # 삭제하기
-        market = get_object_or_404(MarketModel, market_id = market_id) # 기존 거 조회하기
+    def post(self, request, market_id): # 삭제하기
+        market = get_object_or_404(MarketModel, id=market_id) # 기존 거 조회하기
         market.delete()
-        return HttpResponse(status=204)
+        return redirect(reverse("spartamarket:list"))
 
 
 # 마켓 수정하기
 class MarketPutView(View):
-    def put(self, request, market_id): # 수정하기
-        market = get_object_or_404(MarketModel, market_id=market_id) # 기존 거 조회하기
-        data = json.loads(request.body)
-        # form에 market 조회한 값으로 채워둔 거에 request.data 값 기입
-        form = MarketModelForm(data, instance=market)
+    def get(self, request, market_id):
+        market = get_object_or_404(MarketModel, id=market_id)
+        form = MarketModelForm(instance=market)
+        return render(request, "SpartaMarkets/update.html", {"form": form, "market_id": market_id})
+
+    def post(self, request, market_id): # 수정하기
+        market = get_object_or_404(MarketModel, id=market_id) # 기존 거 조회하기
+        form = MarketModelForm(request.POST, instance=market)
         if form.is_valid():
             form.save() # 유효하면 저장
-            return HttpResponse(status=200)
+            return redirect(reverse("spartamarket:detail", args=[market.id]))
         # 유효하지 않으면 에러 반환
-        return HttpResponse(status=400)
+        return render(request, "SpartaMarkets/update.html", {"form": form, "market_id": market_id})
+        
         
         
