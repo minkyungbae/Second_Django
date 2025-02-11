@@ -6,7 +6,7 @@ from django.views import View
 from django.http  import JsonResponse, HttpResponse
 from django.forms.models import model_to_dict
 import json
-
+from django.urls import reverse
 from .models import MarketModel
 from .forms import MarketModelForm
 # from .serializers import MarketModelSerializer
@@ -23,14 +23,20 @@ class MarketInfoView(View):
         return render(request, "SpartaMarkets/market_list.html", content)
 
 # 마켓 새로 입력하기
-class MarketCreateView(View):   
+class MarketCreateView(View):
+    
+    def get(self, request):
+        form = MarketModelForm()
+        return render(request, "SpartaMarkets/create.html", {"form":form})
+    
     def post(self, request): # 입력하기
         form = MarketModelForm(request.POST) # 요청한 데이터를 form에 바인딩
         if form.is_valid():
-            form.save() # request 값을 바로 DB에 저장
-            return render(request, "SpartaMarkets/create.html")
-        # 유효하지 않으면 에러
-        return HttpResponse(status=400)
+            market = form.save() # request 값을 바로 DB에 저장
+            return redirect(reverse("spartamarket:detail", args=[market.id]))
+        
+        content= {"form":form}
+        return render(request, "SpartaMarkets/create.html", content)
         
         
 # 마켓 디테일 보기
