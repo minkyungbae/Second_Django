@@ -8,10 +8,11 @@
 <p><strong>Manager is</strong> {{ market.market_manager }}</p>
 <p><strong>Market Number :</strong> {{ market.market_number }}</p>
 
-<form action="{% url 'delete' market.id %}" method="POST">
+<form action="{% url 'spartamarket:delete' market.id %}" method="POST">
     {% csrf_token %}
     <button type="submit">Delete</button>
 </form>
 
-<a href="{% url 'list' %}">Back to Market List</a>
+<a href="{% url 'spartamarket:update' market.id %}"><button>Fix Informations</button></a>
+<a href="{% url 'spartamarket:list' %}"><button>Back to Market List</button></a>
 {% endblock content %}
