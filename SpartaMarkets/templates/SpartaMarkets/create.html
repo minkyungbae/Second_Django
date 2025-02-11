@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center><h1>New Market</h1></center>
+
+<form action="{% url 'spartamarket:create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button><br><br>
+</form>
+
+<a href="{% url 'spartamarket:list' %}">Back to Market List</a>
+{% endblock content%}
