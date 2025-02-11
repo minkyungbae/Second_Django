@@ -6,13 +6,12 @@
 <a href='{% url 'spartamarket:create' %}'><button>Create Market Informations</button></a>
 <hr>
 <p>
-    {% for market in markets_data %}
-        <a href='{% url 'spartamarket:detail' %}'></a>
-            <h3>[{{ market.id }}] Store of {{ market.market_zone }}</h3>
-            <p>Manager : {{ market.market_manager }}</p>
-            <p>Market Number : {{ market.market_number }}</p>
+{% for market in markets_data %}
+    <a href="{% url 'spartamarket:detail' market.id %}">
+        <h3>[{{ market.id }}] Store of {{ market.market_zone }}</h3>
+    </a>
+        <p>Manager : {{ market.market_manager }}</p>
+        <p>Market Number : {{ market.market_number }}</p>
         <hr>
-    {% endfor %}
-
-</p>
+{% endfor %}
 {% endblock content %}
