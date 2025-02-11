@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center><h1>Market Detail</h1></center>
+<hr>
+<h3><strong>Store of</strong> {{ market.market_zone }}</h3>
+<p><strong>Market Employees : </strong>{{market.market_employees }}</p>
+<p><strong>Manager is</strong> {{ market.market_manager }}</p>
+<p><strong>Market Number :</strong> {{ market.market_number }}</p>
+
+<form action="{% url 'delete' market.id %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+<a href="{% url 'list' %}">Back to Market List</a>
+{% endblock content %}
