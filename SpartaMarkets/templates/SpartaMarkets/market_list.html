@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2>Market's informations</h2>
+<center><h1><strong>Market's Informations<strong></h1></center>
 <a href='{% url 'spartamarket:create' %}'><button>Create Market Informations</button></a>
 <a href='{% url 'customer:customerlist' %}'><button>Go to Profile List</button></a>
 
@@ -10,7 +10,7 @@
 <p>
 {% for market in markets_data %}
     <a href="{% url 'spartamarket:detail' market.id %}">
-        <h3>[{{ market.id }}] Store of {{ market.market_zone }}</h3>
+        <h2>[{{ market.id }}] Store of {{ market.market_zone }}</h2>
     </a>
         <p>Manager : {{ market.market_manager }}</p>
         <p>Market Number : {{ market.market_number }}</p>
