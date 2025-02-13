@@ -4,6 +4,8 @@
 
 <h2>Market's informations</h2>
 <a href='{% url 'spartamarket:create' %}'><button>Create Market Informations</button></a>
+<a href='{% url 'customer:customerlist' %}'><button>Go to Profile List</button></a>
+
 <hr>
 <p>
 {% for market in markets_data %}
