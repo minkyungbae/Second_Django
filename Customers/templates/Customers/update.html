@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Update Customer Profile</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+    <a href="{% url 'customer:detail' customer.customer_id %}"><button>Cancel</button>
+</form>
+
+{% endblock content %}
