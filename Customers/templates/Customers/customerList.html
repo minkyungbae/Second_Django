@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Customer List</h2>
+<a href="{% url "customer:create" %}"><button>Create Customer Profile</button></a>
+<a href="{% url 'spartamarket:list' %}"><button>Back to SpartaMarket List</button></a>
+
+<hr>
+{% for customer in customers %}
+    <a href='{% url 'customer:detail' customer.customer_id %}'>
+        <h3>Profile of {{ customer.customer_name }}</h3>
+    </a>
+        <p>Customer ID : {{ customer.customer_id }}</p>
+        <p>Customer Registration date : {{ customer.customer_regdate }}</p>
+        <hr>
+
+{% endfor %}
+{% endblock content %}
