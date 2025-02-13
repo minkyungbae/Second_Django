@@ -11,3 +11,4 @@ class MarketModelForm(forms.ModelForm):
             "market_number",
             "market_employees",
             ]
+        exclude = ("market_opening_date",)
