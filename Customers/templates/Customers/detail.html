@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Profile of {{ customer.customer_id }}</h1>
+<hr>
+    <p><strong>Customer ID</strong> : {{ customer.customer_id }}</p>
+    <p><strong>Name</strong> : {{ customer.customer_name }}</p>
+    <p><strong>Customer Number</strong> : {{ customer.customer_number }}
+    <p><strong>Customer Registration date</strong> : {{ customer.customer_regdate }}</p>
+
+<a href="{% url "customer:customerlist" %}"><button>Back to Customer List</button></a>
+{% endblock content %}
