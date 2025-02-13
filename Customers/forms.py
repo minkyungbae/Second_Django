@@ -4,9 +4,12 @@ from .models import CustomerModel
 class CustomerModelForm(forms.ModelForm):
     class Meta:
         model = CustomerModel
-        fields = [
-            "customer_id",
-            "customer_name",
-            "customer_number",
-            ]
+        fields = "__all__"
         exclude = ("customer_regdate",)
+        
+        
+class CustomerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomerModel
+        fields = "__all__"
+        exclude = ("customer_regdate","customer_id",)
