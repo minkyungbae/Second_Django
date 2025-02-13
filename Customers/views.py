@@ -6,7 +6,7 @@ from .models import CustomerModel
 from .forms import CustomerModelForm
 
 # 프로필 보기
-class CustomerProfileListView(View):
+class CustomerListView(View):
     def get(self, request):
         customers = CustomerModel.objects.all()
         context = {"customers":customers}
